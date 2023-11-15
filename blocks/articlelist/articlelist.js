@@ -3,7 +3,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 async function loadIndex() {
   const indexResponse = await fetch('/query-index.json');
   if (!indexResponse.ok) {
-    return;
+    return null;
   }
 
   return indexResponse;
@@ -19,30 +19,31 @@ export default async function decorate(block) {
   container.classList.add(`category-list--${category}`);
 
   index.data
-  .forEach((post) => {
-    if (post.type !== category) {
-      return;
-    }
-    console.log(post)
-    if(!post.featured) {
-      const li = document.createElement('li');
-      const picture = createOptimizedPicture(post.image, '', false, [{ width: 500 }]);
-      const date = post['lastModified'];
+    .forEach((post) => {
+      if (post.type !== category) {
+        return;
+      }
+      console.log(post)
+      if(!post.featured) {
+        const li = document.createElement('li');
+        const picture = createOptimizedPicture(post.image, '', false, [{ width: 500 }]);
+        const date = post['lastModified'];
 
-      li.innerHTML = `
-      <a href="${post.path}">
-        <div class="picture">
-          ${picture.outerHTML}
-        </div>
-        <div class="content">
-          <h4>${post.title}</h4>
-          <p>${post.description}</p>
-        </div>
-        </a>
-      `;
-      container.append(li);
+        li.innerHTML = `
+          <a href="${post.path}">
+            <div class="picture">
+              ${picture.outerHTML}
+            </div>
+            <div class="content">
+              <h4>${post.title}</h4>
+              <p>${post.description}</p>
+            </div>
+          </a>
+        `;
+        container.append(li);
+      }
     }
-  });
+  );
 
   block.innerHTML = container.outerHTML;
 }

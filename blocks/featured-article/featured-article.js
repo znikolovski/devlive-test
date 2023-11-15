@@ -16,7 +16,6 @@ function getMetadata(name, doc = document) {
   const meta = [...doc.head.querySelectorAll(`meta[${attr}="${name}"]`)].map((m) => m.content).join(', ');
   return meta || '';
 }
-  
 
 export default async function decorate(block) {
   const link = block.querySelector('a');
