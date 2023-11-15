@@ -1,7 +1,6 @@
 .featured-article {
     display: flex;
-    flex-direction: row-reverse;
-    flex-flow: wrap;
+    flex-flow: row-reverse wrap;
     width: 100%;
     margin-bottom: 1em;
   }
