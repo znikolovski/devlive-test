@@ -23,7 +23,7 @@ export default async function decorate(block) {
       if (post.type !== category) {
         return;
       }
-      if(!post.featured) {
+      if (!post.featured) {
         const li = document.createElement('li');
         const picture = createOptimizedPicture(post.image, '', false, [{ width: 500 }]);
 
